@@ -51,7 +51,7 @@ openssl req -new -x509 -days 365 -key server.key -out server.crt \
 
 ```bash
 # 编译服务器
-g++ -std=c++11 -pthread -o server server.cpp -lssl -lcrypto
+g++ -std=c++11 -pthread -o server CPP_SERVE.cpp -lssl -lcrypto
 ```
 
 步骤4：运行系统
@@ -64,7 +64,7 @@ g++ -std=c++11 -pthread -o server server.cpp -lssl -lcrypto
 终端2 - 启动客户端:
 
 ```bash
-python3 client.py
+python3 PYTHON_CLIENT.py
 ```
 
 💡 使用示例
@@ -72,20 +72,20 @@ python3 client.py
 
 ```bash
 # 默认连接到localhost:8443
-python3 client.py
+python3 PYTHON_CLIENT.py
 ```
 
 指定服务器地址
 
 ```bash
-python3 client.py --host 192.168.1.100 --port 8443
+python3 PYTHON_CLIENT.py --host 192.168.1.100 --port 8443
 ```
 
 测试模式
 
 ```bash
 # 自动发送测试消息
-python3 client.py --mode test
+python3 PYTHON_CLIENT.py --mode test
 ```
 
 快速测试
