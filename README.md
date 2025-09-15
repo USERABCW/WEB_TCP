@@ -6,53 +6,94 @@ setup.sh - 自动化设置脚本，包含安装、编译和证书生成
 
 🚀 快速开始
 方法1：使用自动化脚本（推荐）
-bash# 1. 保存所有代码文件
-# 2. 给脚本执行权限
+
+```bash
+# 1. 保存所有代码文件
+#2. 给脚本执行权限
 chmod +x setup.sh
-
-# 3. 运行设置脚本
+#3.运行setup脚本
 ./setup.sh
+#选择 1 进行完整安装
+```
 
-# 选择 1 进行完整安装
 方法2：手动步骤
 步骤1：安装依赖
 Ubuntu/Debian:
-bashsudo apt-get update
-sudo apt-get install -y g++ make openssl libssl-dev python3
-CentOS/RHEL:
-bashsudo yum install -y gcc-c++ make openssl openssl-devel python3
-macOS:
-bashbrew install openssl@3 python3
-步骤2：生成SSL证书
-bash# 生成私钥
-openssl genrsa -out server.key 2048
 
-# 生成自签名证书
+```bash
+sudo apt-get update
+sudo apt-get install -y g++ make openssl libssl-dev python3
+```
+
+CentOS/RHEL:
+
+```bash
+sudo yum install -y gcc-c++ make openssl openssl-devel python3
+```
+
+macOS:
+
+```bash 
+brew install openssl@3 python3
+```
+
+步骤2：生成SSL证书
+
+```bash
+# 生成私钥
+openssl genrsa -out server.key 2048
+#生成自签名证书
 openssl req -new -x509 -days 365 -key server.key -out server.crt \
   -subj "/C=CN/ST=Beijing/L=Beijing/O=Test/OU=Dev/CN=localhost"
-步骤3：编译C++服务器
-bash# 编译服务器
-g++ -std=c++11 -pthread -o server server.cpp -lssl -lcrypto
+```
 
-# 或使用Makefile
-make
+步骤3：编译C++服务器
+
+```bash
+# 编译服务器
+g++ -std=c++11 -pthread -o server server.cpp -lssl -lcrypto
+```
+
 步骤4：运行系统
 终端1 - 启动服务器:
-bash./server
+
+```bash
+./server
+```
+
 终端2 - 启动客户端:
-bashpython3 client.py
+
+```bash
+python3 client.py
+```
+
 💡 使用示例
 交互模式
-bash# 默认连接到localhost:8443
-python3 client.py
 
-# 指定服务器地址
+```bash
+# 默认连接到localhost:8443
+python3 client.py
+```
+
+指定服务器地址
+
+```bash
 python3 client.py --host 192.168.1.100 --port 8443
+```
+
 测试模式
-bash# 自动发送测试消息
+
+```bash
+# 自动发送测试消息
 python3 client.py --mode test
+```
+
 快速测试
-bashpython3 quick_test.py
+
+```bash
+python3 quick_test.py
+```
+
 🔐 安全特性
 
 TLS 1.2+ - 最低支持TLS 1.2版本
